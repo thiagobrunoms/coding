@@ -11,6 +11,7 @@ class StringBuilder:
 
     def append(self, chars_sequence):
         self.__ensure_capacity(chars_sequence)
+        
         for i in range(len(chars_sequence)):
             self.content[self.current_len] = chars_sequence[i]
             self.current_len = self.current_len + 1

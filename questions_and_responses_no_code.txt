@@ -1,0 +1,23 @@
+1.1. Is Unique: Implement an algorithm to determine if a string has all unique characters. What if you
+cannot use additional data structures?
+Hints: #44, # 777, # 7 32
+
+R. Iterate over the string for each char. Appends each char in a hash table. Check if this char is a key in such a hash table. If so, 
+this char is not unique
+
+Time complexity: O(s)
+Space complexity O(s)
+
+1.2. Check Permutation: Given two strings, write a method to decide if one is a permutation of the
+other.
+Hints: #7, #84, #722, #737
+
+R. Sort both string. Compare if both are equal.
+
+Time complexity: O (s log s)
+
+R. Iterate over both strings and sum up their letter ascii codes. If both sum are equal, one is a permutation of the other.
+
+Time complexity O(s)
+
+1.3.
