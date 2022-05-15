@@ -68,6 +68,18 @@ class LinkedList:
 
         self.current_index -= 1
 
+    def delete_based_on_floyds(self):
+        tortoise = self.head
+        previous = self.head
+        hare = self.head.next
+
+        while (hare != None and hare.next != None):
+            previous = tortoise
+            tortoise = tortoise.next
+            hare = hare.next.next
+
+        previous.next = tortoise.next
+
     def __str__(self):
         content = self.head.__str__()
 
@@ -87,9 +99,12 @@ linkedList.add(Node(4))
 linkedList.add(Node(5))
 linkedList.add(Node(6))
 linkedList.add(Node(7))
+linkedList.add(Node(8))
+linkedList.add(Node(8))
 
 print(linkedList)
 
 linkedList.delete_middle()
-
+print(linkedList)
+linkedList.delete_based_on_floyds()
 print(linkedList)
