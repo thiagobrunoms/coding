@@ -14,42 +14,48 @@ class Node(Generic[T]):
         self.data = data
         self.next = None
 
+
+    # def __str__(self):
+    #     return 'data: ' + self.data + " -> next " + self.next.data if self.next != None else ""
+
+
 class MyQueue:
-    def __init__(self, first: Node):
-        self.first = first
+    def __init__(self):
+        self.front = self.rear = None
 
-    def add(self, node: Node):
-        if self.first == None:
-            self.first = node
+    def add(self, data: T):
+        temp = Node(data)
 
-        current_node = self.first
-        while current_node.next != None:
-            current_node = current_node.next 
+        if self.front == None:
+            self.front = self.rear = temp
+            return
 
-        current_node.next = node
+        self.rear.next = temp
+        self.rear = temp
+
+        print(self.rear)
+    
 
     def remove(self):
-        if self.first == None:
+        if self.front == None:
             raise QueueEmptyError
 
-        data = self.first.data
-        self.first = self.first.next
+        data = self.front.data
+        self.front = self.front.next
 
         return data
 
     def peek(self):
         return self.first.data
 
-my_queue = MyQueue(Node("Thiago"))
-my_queue.add(Node("Bruno"))
-my_queue.add(Node("Melo"))
-my_queue.add(Node("Sales"))
+    def is_empty(self):
+        return self.front == None
 
+my_queue = MyQueue()
+my_queue.add("Thiago")
+my_queue.add("Bruno")
+my_queue.add("Melo")
+my_queue.add("Sales")
 print(my_queue.remove())
 print(my_queue.remove())
 print(my_queue.remove())
-print(my_queue.remove())
-try:
-    print(my_queue.remove())
-except QueueEmptyError:
-    print('Não há elementos!')
