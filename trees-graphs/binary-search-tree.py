@@ -22,6 +22,34 @@ class BinarySearchTree:
 
         return root
 
+    def get_min_value(self, root: Node) -> int:
+        while root.left != None:
+            root = root.left
+
+        return root.value
+
+    def get_max_value(self, root: Node) -> int:
+        while root.right != None:
+            root = root.right
+
+        return root.value
+
+    def exists(self, value: int, root: Node) -> bool:
+        if value == root.value:
+            return True
+
+        if value < root.value:
+            if root.left != None:
+                return self.exists(value, root.left)
+            return False
+
+        
+        if value > root.value:
+            if root.right != None:
+                return self.exists(value, root.right)
+            return False
+
+
     def pre_order_traversall(self, root: Node, elements: list):
         if root != None:
             elements.append(root.value)
@@ -76,3 +104,15 @@ print("Post-order traversal")
 elements = []
 elements = bst.post_order_traversall(root, elements)
 print(elements)
+
+print("Exists?")
+result = bst.exists(18, root)
+print(result)
+
+print("Min value")
+result = bst.get_min_value(root)
+print(result)
+
+print("Max value")
+result = bst.get_max_value(root)
+print(result)
