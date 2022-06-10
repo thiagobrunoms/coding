@@ -53,13 +53,13 @@ seven = Node("7", [])
 eight = Node("8", [])
 
 two.neighbors.extend([three])
-three.neighbors.extend([two, four, five])
+three.neighbors.extend([four, five, two])
 four.neighbors.extend([three, eight])
-five.neighbors.extend([three, seven])
+five.neighbors.extend([seven, three])
 seven.neighbors.extend([five, eight])
-eight.neighbors.extend([four, seven])
+eight.neighbors.extend([seven, four])
 
-dfs = DFS([two, three, four, five, seven, eight], five)
+dfs = DFS([five, three, two, four, seven, eight], five)
 
 dfs.start_visiting()
 
