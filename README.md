@@ -10,3 +10,7 @@ A set of algorithms that solve well-known programming problems. Many of them are
 - Hash Maps
 
 - Stacks and Queues
+
+- Heaps
+
+- Graphs
