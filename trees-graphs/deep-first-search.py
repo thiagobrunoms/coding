@@ -4,8 +4,7 @@ class Node:
         self.neighbors = neighbors
 
 class DFS:
-    def __init__(self, nodes: list, start_node: Node) -> None:
-        self.nodes = nodes
+    def __init__(self, start_node: Node) -> None:
         self.start_node = start_node
         self.visited_nodes = set()
         self.visiting_nodes = []
@@ -59,7 +58,7 @@ five.neighbors.extend([seven, three])
 seven.neighbors.extend([five, eight])
 eight.neighbors.extend([seven, four])
 
-dfs = DFS([five, three, two, four, seven, eight], five)
+dfs = DFS(five)
 
 dfs.start_visiting()
 

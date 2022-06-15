@@ -5,12 +5,13 @@ class Node:
 
 
 class BFS:
-    def __init__(self, visiting_nodes: list, starting_node: Node) -> None:
-        self.visiting_nodes = visiting_nodes
+    def __init__(self,  starting_node: Node) -> None:
+        self.visiting_nodes = []
         self.visited_nodes = []
         self.starting_node = starting_node
 
     def start_visiting(self):
+        print('initing', self.visiting_nodes)
         self.visiting_nodes.append(self.starting_node)
 
         while self.visiting_nodes:
@@ -24,21 +25,37 @@ class BFS:
                 if neighbor not in self.visited_nodes:
                     self.visiting_nodes.append(neighbor)
 
+# two = Node("2", [])
+# three = Node("3", [])
+# four = Node("4", [])
+# five = Node("5", [])
+# six = Node("6", [])
+# seven = Node("7", [])
+# eight = Node("8", [])
+
+# two.neighbors.extend([three])
+# three.neighbors.extend([four, five, two])
+# four.neighbors.extend([three, eight])
+# five.neighbors.extend([seven, three])
+# seven.neighbors.extend([five, eight])
+# eight.neighbors.extend([seven, four])
+
+# dfs = BFS([five, three, two, four, seven, eight], five)
+
 two = Node("2", [])
 three = Node("3", [])
 four = Node("4", [])
 five = Node("5", [])
 six = Node("6", [])
 seven = Node("7", [])
-eight = Node("8", [])
+# eight = Node("8", [])
 
-two.neighbors.extend([three])
-three.neighbors.extend([four, five, two])
-four.neighbors.extend([three, eight])
-five.neighbors.extend([seven, three])
-seven.neighbors.extend([five, eight])
-eight.neighbors.extend([seven, four])
+two.neighbors.extend([three, four])
+three.neighbors.extend([five, six])
+four.neighbors.extend([seven])
+six.neighbors.extend([seven])
 
-dfs = BFS([five, three, two, four, seven, eight], five)
+
+dfs = BFS(two)
 
 dfs.start_visiting()
