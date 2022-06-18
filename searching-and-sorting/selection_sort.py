@@ -1,4 +1,6 @@
 
+#WORST CASE: O(n^2)
+
 def selection_sort_it(elements: list) -> list:
     for i in range(len(elements)):
         min_index = i

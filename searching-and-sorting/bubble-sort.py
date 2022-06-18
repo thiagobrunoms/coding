@@ -1,3 +1,5 @@
+
+#WORST CASE: O(n^2)
 def bubble_sort_it(elements: list) -> list:
     for i in range(len(elements)-1):
         for j in range(len(elements) - i - 1):
