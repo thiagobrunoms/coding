@@ -6,7 +6,6 @@ def insertion_sorting_it(elements: list) -> list:
             temp = elements[j-1]
             elements[j-1] = elements[j]
             elements[j] = temp
-
             j = j - 1
 
     return elements
