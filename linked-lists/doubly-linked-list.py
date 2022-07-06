@@ -38,6 +38,14 @@ class DoublyLinkedList:
         current.previous.next = new_node
         current.previous = new_node
 
+    def removeAtIndex(self, index):
+        current: Node = self.head
+        for i in range(index):
+            current = current.next
+
+        current.previous.next = current.next
+        current.next.previous = current.previous
+
     def show(self):
         current: Node = self.head
         while current.next != None:
@@ -59,4 +67,8 @@ dll.push(40)
 dll.show()
 print('==== AFTER INSERTING === ')
 dll.addAtIndex(35, 2)
+dll.show()
+
+print('==== AFTER DELETING === ')
+dll.removeAtIndex(2)
 dll.show()
