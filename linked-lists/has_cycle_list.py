@@ -8,8 +8,8 @@
 # Output: C
 # Hints: #50, #69, #83, #90
 
-#A more convenient approach is to use a hashtable that keeps the nodes that were seen before. However, this requires an O(N) space
-#Another more smart approach is to use the floyds algorithm. Both pointers will be equal if there is a cycle. 
+# A more convenient approach is to use a hashtable that keeps the nodes that were seen before. However, this requires an O(N) space
+# Another more smart approach is to use the floyds algorithm. Both pointers will be equal if there is a cycle.
 
 class Node:
     def __init__(self, value: int):
@@ -18,6 +18,7 @@ class Node:
 
     def __str__(self):
         return "Node[id = " + str(self.value) + "] - "
+
 
 class LinkedList:
     def __init__(self, head):
@@ -30,7 +31,7 @@ class LinkedList:
         if self.head.next == None:
             self.head.next = n
             return
-        
+
         currentNode = self.head
         while (currentNode.next != None):
             currentNode = currentNode.next
@@ -41,8 +42,9 @@ class LinkedList:
         tortoise = self.head
         hare = self.head.next
 
+        # need to test based on this condition: tortoise != None and tortoise.next != None and hare.fast != None???
         while (hare != None and hare.next != None):
-            #if there is a cycle, both pointers will be the same at some part
+            # if there is a cycle, both pointers will be the same at some part
             print("tortoise", tortoise.value, "hare", hare.value)
             if hare == tortoise:
                 return True
@@ -50,7 +52,7 @@ class LinkedList:
             tortoise = tortoise.next
             hare = hare.next.next
 
-        #hare gets None or hare.next gets None. Thus, no cycle found
+        # hare gets None or hare.next gets None. Thus, no cycle found
         return False
 
     # def __str__(self):
@@ -63,6 +65,7 @@ class LinkedList:
 
     #     return content
 
+
 n1 = Node(1)
 n2 = Node(2)
 n3 = Node(3)
@@ -74,7 +77,7 @@ linked_list.add(n3)
 linked_list.add(n4)
 linked_list.add(n2)
 
-#1 -> 2 -> 3 -> 4 -> 2
+# 1 -> 2 -> 3 -> 4 -> 2
 
 print(linked_list)
 
