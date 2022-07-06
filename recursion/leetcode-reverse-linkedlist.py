@@ -1,4 +1,5 @@
 # Definition for singly-linked list.
+from multiprocessing.dummy import current_process
 from os import link
 
 
@@ -31,6 +32,17 @@ class LinkedList:
 
         self.head = previous
 
+    def reverse_recursively(self, head: ListNode):
+        if head == None or head.next == None:
+            return head
+
+        reversed_node: ListNode = self.reverse_recursively(head.next)
+
+        head.next.next = head
+        head.next = None
+
+        return reversed_node
+
     def show(self):
         current: ListNode = self.head
 
@@ -46,10 +58,15 @@ linkedList.push(20)
 linkedList.push(30)
 linkedList.push(40)
 
-print('before reversing')
-linkedList.show()
+# print('before reversing')
+# linkedList.show()
+# linkedList.reverse_interactively()
+# print('after reversing')
+# linkedList.show()
 
-linkedList.reverse_interactively()
+reversed_linked_list = linkedList.reverse_recursively(linkedList.head)
 
-print('after reversing')
-linkedList.show()
+current: ListNode = reversed_linked_list
+while current != None:
+    print(current.value)
+    current = current.next
