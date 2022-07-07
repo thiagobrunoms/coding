@@ -15,16 +15,16 @@ class Node:
 
 class DetectCycleBFS:
     def __init__(self, start_node: Node):
-        self.graph = []
+        self.to_visit = []
         self.start_node = start_node
         self.visited_nodes = []
 
     def has_cycle(self) -> bool:
-        self.graph.append(self.start_node)
+        self.to_visit.append(self.start_node)
         self.start_node.flag = 0
 
-        while self.graph:
-            current_node: Node = self.graph.pop(0)
+        while self.to_visit:
+            current_node: Node = self.to_visit.pop(0)
 
             if current_node not in self.visited_nodes:
                 print(current_node.value)
@@ -37,7 +37,7 @@ class DetectCycleBFS:
                         return True
                     else:
                         neighbor.flag = 0
-                        self.graph.append(neighbor)
+                        self.to_visit.append(neighbor)
 
         return False
 
