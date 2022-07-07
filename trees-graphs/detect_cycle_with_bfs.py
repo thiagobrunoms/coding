@@ -1,6 +1,10 @@
 
 
-#EXAPLANTION BASED: https://www.youtube.com/watch?v=vXrv3kruvwE
+# EXAPLANTION BASED: https://www.youtube.com/watch?v=vXrv3kruvwE
+
+# flag -1: non-visited node
+# flag 0: node is to be visited (in the queue)
+# flag 1: node has been visited
 
 class Node:
     def __init__(self, value, neighbors: list):
@@ -8,7 +12,7 @@ class Node:
         self.neighbors = neighbors
         self.flag = -1
 
-    
+
 class DetectCycleBFS:
     def __init__(self, start_node: Node):
         self.graph = []
@@ -29,11 +33,11 @@ class DetectCycleBFS:
 
             for neighbor in current_node.neighbors:
                 if neighbor not in self.visited_nodes:
-                    if neighbor.flag == -1:
+                    if neighbor.flag == 0:
+                        return True
+                    else:
                         neighbor.flag = 0
                         self.graph.append(neighbor)
-                    else:
-                        return True
 
         return False
 
