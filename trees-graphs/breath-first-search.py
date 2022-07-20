@@ -6,9 +6,9 @@ class Node:
 
 class BFS:
     def __init__(self,  starting_node: Node) -> None:
-        self.visiting_nodes = []
-        self.visited_nodes = []
         self.starting_node = starting_node
+        self.visited_nodes = set()
+        self.visiting_nodes = []
 
     def start_visiting(self):
         print('initing', self.visiting_nodes)
@@ -19,7 +19,7 @@ class BFS:
 
             if current_node not in self.visited_nodes:
                 print(current_node.value)
-                self.visited_nodes.append(current_node)
+                self.visited_nodes.add(current_node)
 
             for neighbor in current_node.neighbors:
                 if neighbor not in self.visited_nodes:
@@ -41,6 +41,7 @@ class BFS:
 # eight.neighbors.extend([seven, four])
 
 # dfs = BFS([five, three, two, four, seven, eight], five)
+
 
 two = Node("2", [])
 three = Node("3", [])
