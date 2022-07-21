@@ -1,6 +1,3 @@
-from email.mime import image
-
-
 def solution(image):
     result = []
 
@@ -8,24 +5,18 @@ def solution(image):
     max_row = 3
     column = 0
     max_column = 3
-
-    shift_row = 0
     shift_column = 0
 
     new_point = []
     while max_row <= len(image):
-        print('starting', 'maxrow', max_row, 'max_column', max_column)
         sum = 0
 
         for i in range(row, max_row):
-            shift_row = i
             for j in range(column, max_column):
-                print(i, j)
                 shift_column = j
                 sum += image[i][j]
 
         new_average = sum // 9
-        # print('new_average', new_average)
 
         new_point.append(new_average)
         if shift_column < len(image[0]) - 1:
