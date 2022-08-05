@@ -6,7 +6,6 @@ def solution(n):
         digits.insert(0, digit)
 
     power = len(digits) - 2
-    current_removed = 0
     result = 0
     number = 0
     for remove_index_at in range(len(digits)):
