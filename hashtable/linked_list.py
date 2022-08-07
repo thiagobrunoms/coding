@@ -1,9 +1,6 @@
-from locale import currency
-from os import link
-
-
 class Node:
-    def __init__(self, value, next=None):
+    def __init__(self, key, value, next=None):
+        self.key = key,
         self.value = value
         self.next = next
 
@@ -24,7 +21,6 @@ class LinkedList:
         self.size += 1
 
     def insertAt(self, index: int, node: Node) -> bool:
-        print('insert at', index)
         if index == 0:
             self.insert(node)
             self.size += 1
@@ -68,24 +64,24 @@ class LinkedList:
     def show(self):
         current = self.head
         while (current != None):
-            print(current.value)
+            print('key', current.key, 'value', current.value)
             current = current.next
 
 
-n1 = Node(10)
-n2 = Node(20)
-n3 = Node(30)
-n4 = Node(40)
-n5 = Node(25)
+# n1 = Node(1, 10)
+# n2 = Node(2, 20)
+# n3 = Node(3, 30)
+# n4 = Node(4, 40)
+# n5 = Node(5, 25)
 
-linkedList = LinkedList(n1)
-linkedList.insert(n2)
-linkedList.insert(n3)
-linkedList.insert(n4)
-linkedList.show()
-print('=====')
-linkedList.insertAt(2, n5)
-linkedList.show()
-print('=====')
-linkedList.delete(2)
-linkedList.show()
+# linkedList = LinkedList(n1)
+# linkedList.insert(n2)
+# linkedList.insert(n3)
+# linkedList.insert(n4)
+# linkedList.show()
+# print('=====')
+# linkedList.insertAt(2, n5)
+# linkedList.show()
+# print('=====')
+# linkedList.delete(2)
+# linkedList.show()
