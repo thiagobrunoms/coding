@@ -1,16 +1,16 @@
-class Node:
-    def __init__(self, key, value, next=None):
-        self.key = key,
+class ListNode:
+    def __init__(self, key: int, value, next=None):
+        self.id = int(key),
         self.value = value
         self.next = next
 
 
 class LinkedList:
-    def __init__(self, head: Node):
+    def __init__(self, head: ListNode):
         self.head = head
         self.size = 0
 
-    def insert(self, node: Node):
+    def insert(self, node: ListNode):
         if (self.head == None):
             self.head = node
             self.size += 1
@@ -20,7 +20,7 @@ class LinkedList:
         self.head = node
         self.size += 1
 
-    def insertAt(self, index: int, node: Node) -> bool:
+    def insertAt(self, index: int, node: ListNode) -> bool:
         if index == 0:
             self.insert(node)
             self.size += 1
@@ -61,10 +61,27 @@ class LinkedList:
             current = current.next
             count += 1
 
+    def delete_by_key(self, key: tuple) -> bool:
+        if self.head.id == key:
+            self.head = self.head.next
+            return True
+
+        current = self.head
+        privious = None
+        while current != None:
+            if current.id == key:
+                previous.next = current.next
+                return True
+
+            previous = current
+            current = current.next
+
+        return False
+
     def show(self):
         current = self.head
         while (current != None):
-            print('key', current.key, 'value', current.value)
+            print('key', current.id, 'value', current.value)
             current = current.next
 
 
