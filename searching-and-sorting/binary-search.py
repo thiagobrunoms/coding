@@ -6,6 +6,8 @@ class BinarySearch:
         left = 0
         right = len(elements) - 1
         while left <= right:
+            # This option can lead to an interger overflow, since left + right can overflow 32-bit.
+            # In order to avoid it, left + (right - left) // 2 would be safer.
             mid = (left + right) // 2
 
             print('mid', mid)
@@ -31,8 +33,8 @@ class BinarySearch:
             return self.recursive_binary_search(elements, mid + 1, right, target)
 
 
-elements = [1, 2, 3, 4, 5, 6, 7]
+elements = [1, 2, 3, 4, 5, 6, 7, 8]
 bs = BinarySearch()
-result = bs.iteractive_binary_search(elements, 7)
+result = bs.iteractive_binary_search(elements, 8)
 # result = bs.recursive_binary_search(elements, 0, len(elements), 10)
 print(result)

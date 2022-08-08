@@ -3,6 +3,7 @@ class Node:
         self.value = value
         self.neighbors = neighbors
 
+
 class DFS:
     def __init__(self, start_node: Node) -> None:
         self.start_node = start_node
@@ -13,7 +14,7 @@ class DFS:
         self.visiting_nodes.append(self.start_node)
 
         while self.visiting_nodes:
-            current_node: Node = self.visiting_nodes.pop()
+            current_node: Node = self.visiting_nodes.pop()  # Stack
 
             if current_node not in self.visited_nodes:
                 print(current_node.value)
@@ -61,6 +62,3 @@ eight.neighbors.extend([seven, four])
 dfs = DFS(five)
 
 dfs.start_visiting()
-
-
-

@@ -15,7 +15,7 @@ class BFS:
         self.visiting_nodes.append(self.starting_node)
 
         while self.visiting_nodes:
-            current_node: Node = self.visiting_nodes.pop(0)
+            current_node: Node = self.visiting_nodes.pop(0)  # Queue
 
             if current_node not in self.visited_nodes:
                 print(current_node.value)
