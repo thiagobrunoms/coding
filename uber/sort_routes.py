@@ -1,10 +1,5 @@
 # Given a list of [origin, destination] pairs (you can think of them as plane tickets), sort them into a single continuous route
 
-
-from audioop import reverse
-from inspect import BoundArguments
-
-
 class Solution:
     def __init__(self, origin_destinations):
         self.origin_destinations = origin_destinations
