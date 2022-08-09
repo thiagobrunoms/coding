@@ -1,3 +1,6 @@
+from code import interact
+
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -28,10 +31,9 @@ class MyLinkedList:
             current = current.next
             count += 1
 
-    def addAtHead(self, val: int) -> None:
-        current: Node = Node(val)
-        current.next = self.head
-        self.head = current
+    def addAtHead(self, node: Node) -> None:
+        node.next = self.head
+        self.head = node
         self.size += 1
 
     def addAtTail(self, val: int) -> None:
@@ -128,7 +130,7 @@ class Intersection:
             currentll2 = currentll2.next
 
             if currentll1 == currentll2:
-                return currentll1
+                return currentll1  # No difference if returns currentll2?
 
             if currentll1 == None:
                 currentll1 = ll2.head
@@ -136,12 +138,40 @@ class Intersection:
             if currentll2 == None:
                 currentll2 = ll1.head
 
-        return currentll1
+        return currentll1  # No difference if returns currentll2?
 
+
+n1 = Node(10)
+n2 = Node(20)
+n3 = Node(30)
+n4 = Node(40)
+n5 = Node(50)
+n6 = Node(60)
+n7 = Node(70)
 
 l1: MyLinkedList = MyLinkedList()
-l1.addAtHead(10)
-l1.addAtTail(20)
-l1.addAtTail(30)
-l1.addAtTail(40)
-l1.addAtTail(50)
+l1.addAtHead(n1)
+l1.addAtHead(n2)
+l1.addAtHead(n3)
+l1.addAtHead(n4)
+l1.addAtHead(n5)
+l1.addAtHead(n6)
+l1.addAtHead(n7)
+
+n10 = Node(100)
+n20 = Node(200)
+n30 = Node(300)
+n50 = Node(500)
+n60 = Node(600)
+n70 = Node(700)
+
+l2: MyLinkedList = MyLinkedList()
+l2.addAtHead(n10)
+l2.addAtHead(n20)
+l2.addAtHead(n30)
+l2.addAtHead(n4)
+l2.addAtHead(n50)
+
+intersection = Intersection()
+result = intersection.intersect(l1, l2)
+print(result.value)
