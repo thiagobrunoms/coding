@@ -140,6 +140,8 @@ class Intersection:
 
         return currentll1  # No difference if returns currentll2?
 
+# If no intersection found, both pointers will be equals, but they will be both None objects.
+
 
 n1 = Node(10)
 n2 = Node(20)
@@ -174,4 +176,7 @@ l2.addAtHead(n50)
 
 intersection = Intersection()
 result = intersection.intersect(l1, l2)
-print(result.value)
+if result:
+    print(result.value)
+else:
+    print('No intersections found!')
