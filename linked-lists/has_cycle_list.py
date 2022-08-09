@@ -22,10 +22,19 @@ class Node:
 
 class LinkedList:
     def __init__(self, head):
+        self.size = 0
         if head == None:
             self.head = Node(1)
         else:
             self.head = head
+
+    def push(self, n: Node):
+        if self.head == None:
+            self.head = n
+
+        n.next = self.head
+        self.head = n
+        self.size += 1
 
     def add(self, n: Node):
         if self.head.next == None:
@@ -64,6 +73,13 @@ class LinkedList:
     #         current_node = current_node.next
 
     #     return content
+    def show(self):
+        current: Node = self.head
+        count = 0
+        while current != None and count <= self.size:
+            print(current.value)
+            current = current.next
+            count += 1
 
 
 n1 = Node(1)
@@ -72,14 +88,18 @@ n3 = Node(3)
 n4 = Node(4)
 
 linked_list = LinkedList(n1)
-linked_list.add(n2)
-linked_list.add(n3)
-linked_list.add(n4)
-linked_list.add(n2)
+linked_list.push(n2)
+linked_list.push(n3)
+linked_list.push(n4)
+linked_list.push(n1)
+linked_list.push(n2)
+linked_list.push(n3)
+linked_list.push(n4)
+
 
 # 1 -> 2 -> 3 -> 4 -> 2
 
-print(linked_list)
+linked_list.show()
 
 has_cycle = linked_list.has_cycle()
 print(has_cycle)
