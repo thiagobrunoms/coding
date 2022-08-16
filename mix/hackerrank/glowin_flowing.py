@@ -39,15 +39,11 @@ def solution(k, n_tanks, capacities):
         all_overflows_at = time
         remainder = 0
 
-    if last_overflows_at - int(last_overflows_at) <= 0.6:
-        last_overflows_at = math.floor(last_overflows_at)
-    else:
-        last_overflows_at = math.ceil(last_overflows_at)
+    last_overflows_at = math.floor(last_overflows_at) if last_overflows_at - int(
+        last_overflows_at) <= 0.6 else math.ceil(last_overflows_at)
 
-    if all_overflows_at - int(all_overflows_at) <= 0.6:
-        all_overflows_at = math.floor(all_overflows_at)
-    else:
-        all_overflows_at = math.ceil(all_overflows_at)
+    all_overflows_at = math.floor(all_overflows_at) if all_overflows_at - int(
+        all_overflows_at) <= 0.6 else math.ceil(all_overflows_at)
 
     return (last_overflows_at, all_overflows_at)
 
