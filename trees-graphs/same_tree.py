@@ -1,6 +1,4 @@
 # Definition for a binary tree node.
-from curses.ascii import SO
-
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):

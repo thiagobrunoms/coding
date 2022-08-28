@@ -48,7 +48,7 @@ def solution(k, n_tanks, capacities):
     return (last_overflows_at, all_overflows_at)
 
 
-# s = solution(2, 2, [4, 6])
-s = solution(1, 4, [30, 3, 7, 20])
+s = solution(2, 2, [4, 6])
+# s = solution(1, 4, [30, 3, 7, 20])
 print('last overflows at', s[0])
 print('all overflows at', s[1])
