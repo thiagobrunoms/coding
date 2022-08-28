@@ -22,9 +22,6 @@
 # // 3.- diagonal top-left to bottom-right like in the example (and reverted, bottom-right to top-left)
 # // 4.- diagonal top-right to bottom-left (and reverted, bottom-left to top-right)
 
-from tabnanny import check
-
-
 def horizontal_search(matrix, row, column, k, input):
     checked = 2
     start_column = column + 2
