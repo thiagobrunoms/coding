@@ -22,114 +22,162 @@
 # // 3.- diagonal top-left to bottom-right like in the example (and reverted, bottom-right to top-left)
 # // 4.- diagonal top-right to bottom-left (and reverted, bottom-left to top-right)
 
-from curses import start_color
 from tabnanny import check
 
 
+def horizontal_search(matrix, row, column, k, input):
+    checked = 2
+    start_column = column + 2
+    end_column = start_column + 2
+    while start_column < end_column:
+        if matrix[row][start_column] == input[k]:
+            checked += 1
+            k = k + 1 if k > 0 else k - 1
+            start_column += 1
+        else:
+            break
+
+    return checked == len(input)
+
+
+def vertical_search(matrix, row, column, k, input):
+    checked = 2
+    start_row = row + 2
+    end_row = start_row + (len(input)-2)
+    while start_row < end_row:
+        if matrix[start_row][column] == input[k]:
+            checked += 1
+            k = k + 1 if k > 0 else k - 1
+            start_row += 1
+        else:
+            break
+
+    return checked == len(input)
+
+
+def diagonal_top_right_bottom_left_search(matrix, row, column, k, input):
+    checked = 2
+    start_row = row + 2
+    start_column = column - 2
+    while start_row < len(input):
+        if matrix[start_row][start_column] == input[k]:
+            checked += 1
+            k = k + 1 if k > 0 else k - 1
+            start_row += 1
+            start_column -= 1
+        else:
+            break
+
+    return checked == len(input)
+
+
+def diagonal_top_left_bottom_right_search(matrix, row, column, k, input):
+    checked = 2
+    start_row = row + 2
+    start_column = column + 2
+    end_at = start_row + 2
+    while start_row < end_at:
+        if matrix[start_row][start_column] == input[k]:
+            checked += 1
+            k = k + 1 if k > 0 else k - 1
+            start_row += 1
+            start_column += 1
+        else:
+            break
+
+    return checked == len(input)
+
+
 def solution(matrix, input):
+    result: int = 0
     checked = 2
     for row in range(len(matrix)):
         for column in range(len(matrix[row])):
 
-            if matrix[row][column] == input[0]:
-                print('row', row, 'column', column)
-                if matrix[row][column+1] == input[1]:  # left-to-right
-                    print('left-to-right')
-                    k = 2
-                    start = column + 2
-                    for temp_column in range(start, start + (len(input)-2)):
-                        if matrix[row][temp_column] == input[k]:
-                            checked += 1
-                            k += 1
-                        else:
-                            checked = 2
-                            break
+            if matrix[row][column] == input[0] or matrix[row][column] == input[-1]:
+                print('row', row, 'column', column,
+                      'letter', matrix[row][column])
 
-                # read top to bottom
-                elif row + 1 < len(matrix) and matrix[row+1][column] == input[1]:
-                    print('top to bottom')
-                    k = 2
-                    start = row + 2
-                    for temp_row in range(start, start + (len(input)-2)):
-                        if matrix[temp_row][column] == input[k]:
-                            checked += 1
-                            k += 1
-                        else:
-                            checked = 2
-                            break
+                # left-to-right or right-to-left
+                if column + 1 < len(matrix[row]):
+                    if matrix[row][column+1] == input[1]:
+                        print('left-to-right')
+                        result = horizontal_search(
+                            matrix, row, column, 2, input)
+                    elif matrix[row][column+1] == input[-2]:
+                        print('right-to-left')
+                        result = horizontal_search(
+                            matrix, row, column, -3, input)
 
-                # read top-right to bottom-left
-                elif row + 1 < len(matrix) and matrix[row+1][column-1] == input[1]:
-                    print('top-right to bottom-left')
-                    k = 2
-                    start_row = row + 2
-                    start_column = column - 2
-                    while start_row < len(input):
-                        if matrix[start_row][start_column] == input[k]:
-                            checked += 1
-                            k += 1
-                        else:
-                            checked = 2
-                            break
+                # top-to-bottom or bottom-to-top
+                if row + 1 < len(matrix):
+                    if matrix[row+1][column] == input[1]:
+                        print('top to bottom')
+                        result = vertical_search(matrix, row, column, 2, input)
+                    elif matrix[row+1][column] == input[-2]:
+                        print('bottom to top')
+                        result = vertical_search(
+                            matrix, row, column, -3, input)
 
-                        start_row += 1
-                        start_column -= 1
+                # top-right to bottom-left or bottom-left to top-right
+                if row + 1 < len(matrix):
+                    if matrix[row+1][column-1] == input[1]:
+                        print('top-right to bottom-left')
+                        result = diagonal_top_right_bottom_left_search(
+                            matrix, row, column, 2, input)
+                    elif matrix[row+1][column-1] == input[-2]:
+                        print('bottom-left to top-right')
+                        result = diagonal_top_right_bottom_left_search(
+                            matrix, row, column, -3, input)
 
-                # read top-let to bottom-right
-                elif row + 1 < len(matrix) and column + 1 < len(matrix[row+1]) and matrix[row+1][column+1] == input[1]:
-                    print('top-let to bottom-right')
-                    k = 2
-                    start_row = row + 2
-                    start_column = column + 2
-                    end_at = start_row + 2
-                    while start_row < end_at:
-                        if matrix[start_row][start_column] == input[k]:
-                            checked += 1
-                            k += 1
-                        else:
-                            checked = 2
-                            break
+                    if result:
+                        return True
+                # top-let to bottom-right or bottom-right to top-left
+                if row + 1 < len(matrix) and column + 1 < len(matrix[row+1]):
+                    if matrix[row+1][column+1] == input[1]:
+                        print('top-let to bottom-right')
+                        result = diagonal_top_left_bottom_right_search(
+                            matrix, row, column, 2, input)
+                    elif matrix[row+1][column+1] == input[-2]:
+                        print('bottom-right to top-let')
+                        result = diagonal_top_left_bottom_right_search(
+                            matrix, row, column, -3, input)
 
-                        start_row += 1
-                        start_column += 1
-
-            elif matrix[row][column] == input[-1]:  # REVERSE ORDER
-                print('found reverse')
-                print('row', row, 'column', column)
-                # right to left
-                if column+1 < len(matrix[row]) and matrix[row][column+1] == input[-2]:
-                    print('right to left')
-                    k = -3
-                    start_column = column + 2
-                    end_column = start_column + 2
-                    while start_column < end_column:
-                        if matrix[row][start_column] == input[k]:
-                            checked += 1
-                            k -= 1
-                            start_column += 1
-                        else:
-                            checked = 2
-                            break
-
-            if checked == len(input):
-                return True
+                if result:
+                    return True
 
     return False
 
 
 # left-to-right
-# matrix = [['E', 'K', 'F', 'W', 'N', 'U', 'I'],
+matrix = [['E', 'U', 'B', 'E', 'R', 'U', 'I'],
+          ['A', 'X', 'I', 'K', 'F', 'W', 'N'],
+          ['W', 'Q', 'E', 'Z', 'L', 'W', 'X'],
+          ['T', 'L', 'A', 'X', 'Q', 'E', 'R'],
+          ['Y', 'Z', 'X', 'E', 'Z', 'L', 'W'],
+          ['U', 'B', 'E', 'R', 'I', 'O', 'Q']]
+
+# right-to-left
+# matrix = [['E', 'F', 'G', 'D', 'B', 'U', 'I'],
 #           ['A', 'X', 'I', 'K', 'F', 'W', 'N'],
-#           ['W', 'Q', 'E', 'Z', 'L', 'W', 'X'],
+#           ['W', 'Q', 'R', 'E', 'B', 'U', 'X'],
 #           ['T', 'L', 'A', 'X', 'Q', 'E', 'R'],
 #           ['Y', 'Z', 'X', 'E', 'Z', 'L', 'W'],
-#           ['U', 'B', 'E', 'R', 'I', 'O', 'Q']]
+#           ['D', 'F', 'S', 'R', 'I', 'O', 'Q']]
 
 # top to bottom
-# matrix = [['E', 'K', 'F', 'W', 'N', 'U', 'I'],
-#           ['A', 'X', 'X', 'K', 'F', 'W', 'N'],
-#           ['W', 'Q', 'U', 'Z', 'L', 'W', 'X'],
-#           ['T', 'L', 'B', 'X', 'Q', 'E', 'R'],
+# matrix = [['U', 'K', 'F', 'W', 'N', 'U', 'I'],
+#           ['B', 'X', 'X', 'K', 'F', 'W', 'N'],
+#           ['E', 'Q', 'U', 'Z', 'L', 'W', 'X'],
+#           ['R', 'L', 'B', 'X', 'Q', 'E', 'R'],
+#           ['Y', 'Z', 'E', 'E', 'Z', 'L', 'W'],
+#           ['U', 'Q', 'R', 'R', 'I', 'O', 'Q']]
+
+# bottom to top
+# matrix = [['R', 'K', 'F', 'W', 'N', 'U', 'I'],
+#           ['E', 'X', 'X', 'K', 'F', 'W', 'N'],
+#           ['B', 'Q', 'U', 'Z', 'L', 'W', 'X'],
+#           ['U', 'L', 'B', 'X', 'Q', 'E', 'R'],
 #           ['Y', 'Z', 'E', 'E', 'Z', 'L', 'W'],
 #           ['U', 'Q', 'R', 'R', 'I', 'O', 'Q']]
 
@@ -141,7 +189,15 @@ def solution(matrix, input):
 #           ['Y', 'Z', 'E', 'E', 'Z', 'L', 'W'],
 #           ['U', 'Q', 'R', 'R', 'I', 'O', 'Q']]
 
-# top-let to bottom-right
+# bottom-left to top-right
+# matrix = [['E', 'K', 'F', 'W', 'N', 'R', 'I'],
+#           ['A', 'X', 'X', 'K', 'E', 'W', 'N'],
+#           ['W', 'Q', 'U', 'B', 'L', 'W', 'X'],
+#           ['T', 'L', 'U', 'Y', 'Q', 'E', 'R'],
+#           ['Y', 'Z', 'E', 'E', 'Z', 'L', 'W'],
+#           ['U', 'Q', 'R', 'R', 'I', 'O', 'Q']]
+
+# top-left to bottom-right
 # matrix = [['E', 'K', 'X', 'E', 'B', 'U', 'I'],
 #           ['A', 'U', 'R', 'X', 'B', 'W', 'N'],
 #           ['E', 'Q', 'B', 'K', 'V', 'W', 'X'],
@@ -149,20 +205,14 @@ def solution(matrix, input):
 #           ['Y', 'Z', 'E', 'E', 'R', 'X', 'R'],
 #           ['U', 'Q', 'R', 'R', 'I', 'O', 'Q']]
 
-# REVERSE - right to left
-# matrix = [['E', 'X', 'R', 'C', 'D', 'U', 'I'],
-#           ['A', 'U', 'T', 'K', 'F', 'W', 'N'],
-#           ['W', 'X', 'Y', 'J', 'L', 'X', 'P'],
-#           ['R', 'E', 'F', 'H', 'K', 'E', 'S'],
-#           ['Y', 'R', 'X', 'E', 'Z', 'L', 'W'],
-#           ['C', 'B', 'U', 'R', 'E', 'B', 'U']]
+# bottom-right to top-left
+# matrix = [['E', 'K', 'X', 'E', 'B', 'U', 'I'],
+#           ['A', 'R', 'R', 'X', 'B', 'W', 'N'],
+#           ['E', 'Q', 'E', 'K', 'V', 'W', 'X'],
+#           ['T', 'R', 'E', 'B', 'U', 'E', 'R'],
+#           ['Y', 'Z', 'E', 'E', 'U', 'X', 'R'],
+#           ['U', 'Q', 'R', 'R', 'I', 'O', 'Q']]
 
-# matrix = [['E', 'X', 'X', 'R', 'R', 'U', 'I'],
-#           ['A', 'R', 'T', 'K', 'F', 'W', 'N'],
-#           ['W', 'E', 'Y', 'J', 'L', 'X', 'P'],
-#           ['T', 'B', 'A', 'W', 'K', 'E', 'S'],
-#           ['Y', 'U', 'X', 'E', 'Z', 'L', 'W'],
-#           ['C', 'B', 'U', 'R', 'I', 'O', 'Q']]
 
 s = solution(matrix, 'UBER')
 print('result', s)
