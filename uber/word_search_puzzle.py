@@ -106,8 +106,9 @@ def solution(matrix, input):
                         result = horizontal_search(
                             matrix, row, column, -3, input)
 
-                # top-to-bottom or bottom-to-top
-                if row + 1 < len(matrix):
+                if row + 1 < len(matrix) and column + 1 < len(matrix[row+1]):
+
+                    # top-to-bottom or bottom-to-top
                     if matrix[row+1][column] == input[1]:
                         print('top to bottom')
                         result = vertical_search(matrix, row, column, 2, input)
@@ -116,8 +117,7 @@ def solution(matrix, input):
                         result = vertical_search(
                             matrix, row, column, -3, input)
 
-                # top-right to bottom-left or bottom-left to top-right
-                if row + 1 < len(matrix):
+                    # top-right to bottom-left or bottom-left to top-right
                     if matrix[row+1][column-1] == input[1]:
                         print('top-right to bottom-left')
                         result = diagonal_top_right_bottom_left_search(
@@ -127,10 +127,7 @@ def solution(matrix, input):
                         result = diagonal_top_right_bottom_left_search(
                             matrix, row, column, -3, input)
 
-                    if result:
-                        return True
-                # top-let to bottom-right or bottom-right to top-left
-                if row + 1 < len(matrix) and column + 1 < len(matrix[row+1]):
+                    # top-let to bottom-right or bottom-right to top-left
                     if matrix[row+1][column+1] == input[1]:
                         print('top-let to bottom-right')
                         result = diagonal_top_left_bottom_right_search(
@@ -210,43 +207,13 @@ matrix = [['E', 'U', 'B', 'E', 'R', 'U', 'I'],
 #           ['Y', 'Z', 'E', 'E', 'U', 'X', 'R'],
 #           ['U', 'Q', 'R', 'R', 'I', 'O', 'Q']]
 
+# NO INPUT FOUND
+# matrix = [['E', 'X', 'D', 'E', 'R', 'U', 'I'],
+#           ['A', 'X', 'I', 'K', 'F', 'W', 'N'],
+#           ['W', 'Q', 'E', 'Z', 'L', 'W', 'X'],
+#           ['T', 'L', 'A', 'X', 'Q', 'E', 'R'],
+#           ['Y', 'Z', 'X', 'E', 'Z', 'L', 'W'],
+#           ['U', 'W', 'F', 'R', 'I', 'O', 'Q']]
 
 s = solution(matrix, 'UBER')
-print('result', s)
-
-# print(found_letters_at)
-# checked = 1
-# while len(found_letters_at) > len(input):
-#     first_tuple_letter = found_letters_at[0]
-#     if first_tuple_letter[0] == input[0]:
-#         previous_row = first_tuple_letter[1]
-#         previous_column = first_tuple_letter[2]
-
-#         for index in range(1, len(found_letters_at)):
-#             if input[index] == found_letters_at[index][0]:
-#                 row = found_letters_at[index][1]
-#                 column = found_letters_at[index][2]
-#                 if (row == previous_row and column == previous_column + 1) or \
-#                         (row == previous_row + 1 and (column == previous_column or column == previous_column + 1)):
-#                     checked += 1
-#                     continue
-#                 else:
-#                     del found_letters_at[index]
-#                     break
-#             else:
-#                 del found_letters_at[index]
-#                 break
-
-#     # word is in reverse order?
-#     elif first_tuple_letter[0] == input[-1]:
-#         pass
-
-#     else:
-#         del found_letters_at[0]
-
-#     if checked == len(input):
-#         return True
-
-# return False
-
-# for tuple_letter in found_letters_at:
+print('Result', s)
