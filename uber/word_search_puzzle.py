@@ -87,7 +87,7 @@ def diagonal_top_left_bottom_right_search(matrix, row, column, k, input):
 
 def solution(matrix, input):
     result: int = 0
-    checked = 2
+
     for row in range(len(matrix)):
         for column in range(len(matrix[row])):
 
