@@ -17,10 +17,16 @@ A set of algorithms that solve well-known programming problems. Many of them are
 
 - Heaps
 
-- Graphs
+- Trees and Graphs
+
+- Recursion and Dynamic Programming
+
+- Counting problems
 
 # List of platform problems
 
 - CodeSignal
 
 - Leetcode
+
+- ICPC
