@@ -1,7 +1,7 @@
 # Coding - Interview Problems
 
 - What is this project about?
-A set of algorithms that solve well-known programming problems. Many of them are based on the book "The Cracking Code Interview".
+A set of algorithms that solve well-known programming problems. Many of them are based on the book "The Cracking Code Interview", and from platforms like LeetCode and Codesignal.
 
 # List of problem categories:
 
