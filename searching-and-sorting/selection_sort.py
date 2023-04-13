@@ -8,9 +8,7 @@ def selection_sort_it(elements: list) -> list:
             if elements[j] < elements[min_index]:
                 min_index = j
 
-        temp = elements[i]
-        elements[i] = elements[min_index]
-        elements[min_index] = temp
+        elements[i], elements[min_index] = elements[min_index], elements[i]
 
     return elements
 
