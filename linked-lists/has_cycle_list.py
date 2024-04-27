@@ -63,7 +63,20 @@ class LinkedList:
 
         # hare gets None or hare.next gets None. Thus, no cycle found
         return False
+    
+    def detect_cycle_start(self):
+        slow = self.head
+        fast = self.head.next
+        print('start slow ' + str(slow.value))
+        print('start fast ' + str(fast.value))
+        while fast != None and fast.next != None:
+            if fast == slow:
+                return slow
+            
+            slow = slow.next
+            fast = fast.next.next
 
+        return
     # def __str__(self):
     #     content = self.head.__str__()
 
@@ -103,3 +116,6 @@ linked_list.show()
 
 has_cycle = linked_list.has_cycle()
 print(has_cycle)
+
+cycle_start_at = linked_list.detect_cycle_start()
+print(cycle_start_at.value)
