@@ -5,9 +5,11 @@ class Node:
 
 class LinkedList:
     def __init__(self):
+        self.length = 0
         self.head = None
 
     def push(self, data: int):
+        self.length = self.length + 1
         node = Node(data)
         if self.head == None:
             self.head = node
@@ -18,20 +20,38 @@ class LinkedList:
 
     def add(self, data: int):
         node = Node(data)
+        if self.head == None:
+            self.head = node
+            return
+        
         current = self.head
         while current.next != None:
             current = current.next
 
         current.next = node
+        self.length = self.length + 1
 
     def insert(self, data: int, index: int):
+        if index > self.length + 1:
+            raise Exception('index biggest than linked list length: ' + str(self.length))
+        
+        self.length = self.length + 1
+        node = Node(data)
+        if self.head == None:
+            self.head = node
+            return
+        
+        if index == 0: #can reuse the 'push' method
+            node.next = self.head
+            self.head = node
+            return
+
         position = 0
         current = self.head
         while (position + 1 < index):
             current = current.next
             position = position + 1
 
-        node = Node(data)
         node.next = current.next
         current.next = node
         
@@ -39,6 +59,7 @@ class LinkedList:
         if self.head == None:
             return
         
+        self.length = self.length - 1
         if self.head.next == None:
             temp = self.head
             self.head = None
@@ -121,3 +142,29 @@ if not linkedList.is_empty():
     print("Current List === ")
     is_empty = linkedList.is_empty()
     assert is_empty, 'Faild - not empty'
+
+print("new list")
+ll2 = LinkedList()
+ll2.insert(0, 0)
+ll2.show()
+
+try:
+    ll2.insert(11, 100)
+except Exception as e:
+    print(e)
+
+ll3 = LinkedList()
+ll3.add(0)
+ll3.add(1)
+ll3.add(2)
+ll3.add(3)
+ll3.add(4)
+ll3.insert(100, 5)
+ll3.show()
+
+
+ll3.insert(200, 6)
+ll3.show()
+
+ll3.insert(300, 3)
+ll3.show()
