@@ -69,6 +69,25 @@ class LinkedList:
         self.head = self.head.next
         return temp
     
+    def delete_at(self, index):
+        if index > self.length:
+            raise Exception('Element does not exist!')
+        
+        if index == 0:
+            self.pop()
+            return
+    
+        position = 0
+        previous = self.head
+        current = self.head
+        while position < index and current.next != None: # 1->2->3->4
+            previous = current
+            current = current.next
+            position = position + 1
+
+        previous.next = current.next
+        self.length = self.length - 1
+    
     def reverse(self):
         self.head = self.__reverse_myself(self.head)
     
@@ -159,12 +178,20 @@ ll3.add(1)
 ll3.add(2)
 ll3.add(3)
 ll3.add(4)
-ll3.insert(100, 5)
+ll3.insert(100, 4)
 ll3.show()
-
+ll3.insert(150, 5)
+ll3.show()
 
 ll3.insert(200, 6)
 ll3.show()
 
 ll3.insert(300, 3)
+ll3.show()
+
+print('after removing first')
+ll3.delete_at(0)
+ll3.show()
+print('after removing last')
+ll3.delete_at(ll3.length)
 ll3.show()
