@@ -118,6 +118,15 @@ class LinkedList:
         node.next = None
         return node1
     
+    def find_middle_node(self):
+        slow = self.head
+        fast = self.head.next
+        while fast != None and fast.next != None:
+            slow = slow.next
+            fast = fast.next.next
+
+        return slow
+    
     def is_empty(self):
         return self.head == None
 
@@ -226,3 +235,7 @@ ll3.show()
 print('Reverting interactively')
 ll3.reverse(False)
 ll3.show()
+
+print('Middle node')
+middle = ll3.find_middle_node()
+print(middle.data)
