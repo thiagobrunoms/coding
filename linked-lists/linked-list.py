@@ -4,8 +4,8 @@ class Node:
         self.next = None
 
 class LinkedList:
-    def __init__(self, initial: int):
-        self.head = Node(initial)
+    def __init__(self):
+        self.head = None
 
     def insert(self, data):
         node = Node(data)
@@ -55,7 +55,8 @@ class LinkedList:
 
 
 print("Current List === ")
-linkedList = LinkedList(0)
+linkedList = LinkedList()
+linkedList.insert(0)
 linkedList.insert(1)
 linkedList.insert(2)
 linkedList.insert(3)
