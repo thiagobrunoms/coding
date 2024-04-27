@@ -30,9 +30,9 @@ class LinkedList:
         return temp
     
     def reverse(self):
-        self.head = self.reverse_myself(self.head)
+        self.head = self.__reverse_myself(self.head)
     
-    def reverse_myself(self, node: Node):
+    def __reverse_myself(self, node: Node):
         if (node == None):
             return node
 
