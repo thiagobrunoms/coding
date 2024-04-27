@@ -7,7 +7,7 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
-    def insert(self, data):
+    def push(self, data):
         node = Node(data)
         if self.head == None:
             self.head = node
@@ -15,6 +15,14 @@ class LinkedList:
         
         node.next = self.head
         self.head = node
+
+    def add(self, data):
+        node = Node(data)
+        current = self.head
+        while current.next != None:
+            current = current.next
+
+        current.next = node
 
     def pop(self):
         if self.head == None:
@@ -39,7 +47,7 @@ class LinkedList:
         if (node.next == None):
             return node
 
-        node1 = self.reverse_myself(node.next)
+        node1 = self.__reverse_myself(node.next)
         node.next.next = node
         node.next = None
         return node1
@@ -56,14 +64,19 @@ class LinkedList:
 
 print("Current List === ")
 linkedList = LinkedList()
-linkedList.insert(0)
-linkedList.insert(1)
-linkedList.insert(2)
-linkedList.insert(3)
+linkedList.push(0)
+linkedList.push(1)
+linkedList.push(2)
+linkedList.push(3)
 linkedList.show()
 
 print('reversing the linked list')
 linkedList.reverse()
+linkedList.show()
+
+print('adding elements into the end of the linked list')
+linkedList.add(6)
+linkedList.add(7)
 linkedList.show()
 
 #The sequence of removal assert checks depends if the list is reversed or not - pay attention!
@@ -80,6 +93,12 @@ if not linkedList.is_empty():
 
     popped = linkedList.pop()
     assert popped.data == 3, 'Failed'
+
+    popped = linkedList.pop()
+    assert popped.data == 6, 'Failed'
+
+    popped = linkedList.pop()
+    assert popped.data == 7, 'Failed'
 
     print("Current List === ")
     is_empty = linkedList.is_empty()
