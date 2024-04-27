@@ -88,9 +88,24 @@ class LinkedList:
         previous.next = current.next
         self.length = self.length - 1
     
-    def reverse(self):
-        self.head = self.__reverse_myself(self.head)
+    def reverse(self, recursively: bool):
+        if recursively:
+            self.head = self.__reverse_myself(self.head)
+        else:
+            self.__reverse_iteratively()
     
+    def __reverse_iteratively(self):
+        previous: Node = None
+        current = self.head
+        
+        while current != None:
+            nextNode = current.next          
+            current.next = previous
+            previous = current
+            current = nextNode
+            
+        self.head = previous
+
     def __reverse_myself(self, node: Node):
         if (node == None):
             return node
@@ -112,6 +127,18 @@ class LinkedList:
             print(current.data)
             current = current.next
 
+    def check(self):
+        first = self.head
+        print(first.data)
+        second = first.next
+        print(second.data)
+        third = second.next
+        print(third.data)
+        fourth = third.next
+        print(fourth.data)
+        fifth = fourth.next
+        print(fifth.data)
+
 
 print("Current List === ")
 linkedList = LinkedList()
@@ -122,7 +149,7 @@ linkedList.push(3)
 linkedList.show()
 
 print('reversing the linked list')
-linkedList.reverse()
+linkedList.reverse(True)
 linkedList.show()
 
 print('adding elements into the end of the linked list')
@@ -194,4 +221,8 @@ ll3.delete_at(0)
 ll3.show()
 print('after removing last')
 ll3.delete_at(ll3.length)
+ll3.show()
+
+print('Reverting interactively')
+ll3.reverse(False)
 ll3.show()
