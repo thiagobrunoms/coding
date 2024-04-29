@@ -37,6 +37,8 @@ class LinkedList:
         self.size += 1
 
     def add(self, n: Node):
+        self.size += 1
+
         if self.head.next == None:
             self.head.next = n
             return
@@ -64,28 +66,33 @@ class LinkedList:
         # hare gets None or hare.next gets None. Thus, no cycle found
         return False
     
-    def detect_cycle_start(self):
+    def detect_cycle_start(self) -> Node:
         slow = self.head
-        fast = self.head.next
-        print('start slow ' + str(slow.value))
-        print('start fast ' + str(fast.value))
-        while fast != None and fast.next != None:
-            if fast == slow:
-                return slow
-            
+        fast = self.head
+        cycle_found = False
+
+        while fast is not None and fast.next is not None:
             slow = slow.next
             fast = fast.next.next
 
-        return
-    # def __str__(self):
-    #     content = self.head.__str__()
+            if slow == fast:
+                cycle_found = True
+                break
 
-    #     current_node = self.head.next
-    #     while current_node != None:
-    #         content += current_node.__str__()
-    #         current_node = current_node.next
+        if not cycle_found:
+            return None  # No cycle found
 
-    #     return content
+        # Reset one pointer back to the head
+        slow = self.head
+
+        # Move both pointers at the same pace until they meet again
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
+
+        # The meeting point is the cycle start point
+        return slow
+
     def show(self):
         current: Node = self.head
         count = 0
@@ -99,16 +106,17 @@ n1 = Node(1)
 n2 = Node(2)
 n3 = Node(3)
 n4 = Node(4)
+n5 = Node(5)
+n6 = Node(6)
 
 linked_list = LinkedList(n1)
-linked_list.push(n2)
-linked_list.push(n3)
-linked_list.push(n4)
-linked_list.push(n1)
-linked_list.push(n2)
-linked_list.push(n3)
-linked_list.push(n4)
-
+linked_list.add(n2)
+linked_list.add(n3)
+linked_list.add(n4)
+linked_list.add(n5)
+linked_list.add(n6)
+linked_list.add(n3)
+print("main head" + str(linked_list.head.value))
 
 # 1 -> 2 -> 3 -> 4 -> 2
 
@@ -119,3 +127,4 @@ print(has_cycle)
 
 cycle_start_at = linked_list.detect_cycle_start()
 print(cycle_start_at.value)
+
