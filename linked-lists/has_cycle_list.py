@@ -76,6 +76,7 @@ class LinkedList:
             fast = fast.next.next
 
             if slow == fast:
+                print('cycle detected at', slow.value)
                 cycle_found = True
                 break
 
@@ -92,6 +93,24 @@ class LinkedList:
 
         # The meeting point is the cycle start point
         return slow
+    
+    def remove_loop(self):
+        slow = self.head
+        fast = self.head
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+
+            if slow == fast:
+                break
+
+        slow = self.head
+        while slow.next != fast.next:
+            slow = slow.next
+            fast = fast.next
+
+        fast.next = None
+        return fast
 
     def show(self):
         current: Node = self.head
@@ -126,5 +145,11 @@ has_cycle = linked_list.has_cycle()
 print(has_cycle)
 
 cycle_start_at = linked_list.detect_cycle_start()
-print(cycle_start_at.value)
+print('starting loop node', cycle_start_at.value)
+
+removed_loop_at = linked_list.remove_loop()
+print('removed loop at', removed_loop_at.value, removed_loop_at.next)
+
+has_cycle = linked_list.has_cycle()
+print(has_cycle)
 
