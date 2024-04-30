@@ -31,9 +31,6 @@ class LinkedList:
 
         self.head = previous
 
-    def removeHead(self):
-        self.head = self.head.next
-
     def show(self):
         current = self.head
         number = 0
@@ -64,7 +61,7 @@ class Solution:
         if carry > 0:
             temp.next = Node(carry)
 
-        return sumNode
+        return sumNode.next
 
 
 linked1 = LinkedList()
@@ -86,6 +83,5 @@ s = Solution()
 result: Node = s.sum(linked1.head, linked2.head)
 final_linked_list = LinkedList()
 final_linked_list.push(result)
-final_linked_list.removeHead()
 
 print(final_linked_list.show())
