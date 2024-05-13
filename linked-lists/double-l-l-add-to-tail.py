@@ -28,6 +28,21 @@ class DoubleLinkedList:
         node.previous = self.tail
         self.tail = node
 
+    def deleteHead(self):
+        if self.head == None:
+            return
+        
+        self.head = self.head.next
+        self.head.previous = None
+
+    def deleteTail(self):
+        if self.head == None and self.tail == None:
+            return
+        
+        self.tail = self.tail.previous
+        self.tail.next = None
+
+
     def showForward(self):
         current = self.head
         while current is not None:
@@ -40,6 +55,9 @@ class DoubleLinkedList:
             print(current.value)
             current = current.previous
 
+    def showBorders(self):
+        print("HEAD = ", self.head.value)
+        print("TAIL = ", self.tail.value)
 
 n1 = Node(1)
 n2 = Node(2)
@@ -53,6 +71,29 @@ list.addToStart(n2)
 list.addToStart(n3)
 list.addToStart(n4)
 list.addToStart(n5)
+
+list.showBorders()
+
+print('show head to tail')
 list.showForward()
+print('show tail to head')
 list.showBackward()
         
+print('Delete head')
+list.deleteHead()
+
+list.showBorders()
+
+print('show head to tail')
+list.showForward()
+print('show tail to head')
+list.showBackward()
+
+print('Delete tail')
+list.deleteTail()
+
+list.showBorders()
+print('show head to tail')
+list.showForward()
+print('show tail to head')
+list.showBackward()
