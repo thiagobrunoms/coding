@@ -55,6 +55,15 @@ class DoubleLinkedList:
             print(current.value)
             current = current.previous
 
+    def concatenateFromStart(self):
+        content = ''
+        current = self.head
+        while current is not None:
+            content = content + current.value
+            current = current.next
+
+        print(content)
+
     def showBorders(self):
         print("HEAD = ", self.head.value)
         print("TAIL = ", self.tail.value)
@@ -97,3 +106,12 @@ print('show head to tail')
 list.showForward()
 print('show tail to head')
 list.showBackward()
+
+reversed_word_list = DoubleLinkedList()
+name = "Thiago"
+for l in name:
+    node = Node(l)
+    reversed_word_list.addToStart(node)
+
+reversed_word_list.showForward()
+reversed_word_list.concatenateFromStart()
