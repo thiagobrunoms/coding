@@ -25,6 +25,27 @@ class BFS:
                 if neighbor not in self.visited_nodes:
                     self.visiting_nodes.append(neighbor)
 
+class NodeBST:
+    def __init__(self, value):
+        self.value = value
+        self.left: NodeBST = None
+        self.right: NodeBST = None
+class BFSInBSTree:
+    def __init__(self, root: NodeBST):
+        self.visiting_nodes = [root]
+
+    def start_searching(self):
+        while len(self.visiting_nodes) > 0:
+            current = self.visiting_nodes.pop(0)
+            print(current)
+            if current.left is not None:
+                self.visiting_nodes.append(current.left)
+            if current.right is not None:
+                self.visiting_nodes.append(current.right)
+            
+
+    
+
 # two = Node("2", [])
 # three = Node("3", [])
 # four = Node("4", [])
